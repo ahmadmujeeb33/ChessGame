@@ -61,6 +61,7 @@ class Bishop{
 
 
     PlaceBishop(){
+        console.log("fdfbslbk")
         if(this.attack()){
             let createImage = document.createElement("img");
             this.removePonds(this.futurePosition);
@@ -128,6 +129,8 @@ class Bishop{
         let futurePositionColumn = Math.floor(futurePositionRow % 10);
         futurePositionRow = Math.floor(futurePositionRow/10);
 
+        console.log("in valid bishop move");
+
       
 
         let combine = "";
@@ -164,6 +167,7 @@ class Bishop{
             }
         }
         else if((currentPositionColumn < futurePositionColumn) && (currentPositionRow>futurePositionRow)){
+            console.log("thisherei");
             let j  = currentPositionRow - 1;
             for(let i = currentPositionColumn + 1; i<futurePositionColumn;i++){
                 combine = "";
@@ -181,6 +185,7 @@ class Bishop{
 
         }
         else{
+            console.log("thisherei398623592");
             let j  = currentPositionRow-1;
             for(let i = currentPositionColumn - 1; i>futurePositionColumn;i--){
                 combine = "";
