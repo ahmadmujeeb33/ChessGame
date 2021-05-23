@@ -51,8 +51,8 @@ class Pieces{
 
 
 
-let map = new Pieces({"10":"nothing", "11":"BlackKnight.png", "12":"BlackBishop.png","13":"nothing","14":"nothing","15":"BlackBishop.png","16":"BlackKnight.png","17":"nothing", "20":"BlackPawn.png","21":"BlackPawn.png","22":"BlackPawn.png","23":"BlackPawn.png","24":"BlackPawn.png","25":"BlackPawn.png","26":"BlackPawn.png","27":"BlackPawn.png","30":"nothing","31":"nothing","32":"nothing","33":"nothing","34":"nothing","35":"nothing","36":"nothing","37":"nothing","40":"nothing","41":"nothing","42":"nothing","43":"nothing","44":"nothing","45":"nothing","46":"nothing","47":"nothing","50":"nothing","51":"nothing","52":"nothing","53":"nothing","54":"nothing","55":"nothing","56":"nothing","57":"nothing","60":"nothing","61":"nothing","62":"nothing","63":"nothing","64":"nothing","65":"nothing","66":"nothing","67":"nothing","70":"WhitePawn.png","71":"WhitePawn.png","72":"WhitePawn.png","73":"WhitePawn.png","74":"WhitePawn.png","75":"WhitePawn.png","76":"WhitePawn.png","77":"WhitePawn.png","80":"nothing","81":"nothing","82":"WhiteBishop.png","83":"nothing","84":"nothing","85":"WhiteBishop.png","86":"nothing","87":"nothing"},"Black",true,true,"","");
-let infomationOFPieces = {"10":"nothing", "11":"BlackKnight.png", "12":"BlackBishop.png","13":"nothing","14":"nothing","15":"BlackBishop.png","16":"BlackKnight.png","17":"nothing", "20":"BlackPawn.png","21":"BlackPawn.png","22":"BlackPawn.png","23":"BlackPawn.png","24":"BlackPawn.png","25":"BlackPawn.png","26":"BlackPawn.png","27":"BlackPawn.png","30":"nothing","31":"nothing","32":"nothing","33":"nothing","34":"nothing","35":"nothing","36":"nothing","37":"nothing","40":"nothing","41":"nothing","42":"nothing","43":"nothing","44":"nothing","45":"nothing","46":"nothing","47":"nothing","50":"nothing","51":"nothing","52":"nothing","53":"nothing","54":"nothing","55":"nothing","56":"nothing","57":"nothing","60":"nothing","61":"nothing","62":"nothing","63":"nothing","64":"nothing","65":"nothing","66":"nothing","67":"nothing","70":"WhitePawn.png","71":"WhitePawn.png","72":"WhitePawn.png","73":"WhitePawn.png","74":"WhitePawn.png","75":"WhitePawn.png","76":"WhitePawn.png","77":"WhitePawn.png","80":"nothing","81":"nothing","82":"WhiteBishop.png","83":"nothing","84":"nothing","85":"WhiteBishop.png","86":"nothing","87":"nothing"};
+let map = new Pieces({"10":"nothing", "11":"BlackKnight.png", "12":"BlackBishop.png","13":"nothing","14":"nothing","15":"BlackBishop.png","16":"BlackKnight.png","17":"nothing", "20":"BlackPawn.png","21":"BlackPawn.png","22":"BlackPawn.png","23":"BlackPawn.png","24":"BlackPawn.png","25":"BlackPawn.png","26":"BlackPawn.png","27":"BlackPawn.png","30":"nothing","31":"nothing","32":"nothing","33":"nothing","34":"nothing","35":"nothing","36":"nothing","37":"nothing","40":"nothing","41":"nothing","42":"nothing","43":"nothing","44":"nothing","45":"nothing","46":"nothing","47":"nothing","50":"nothing","51":"nothing","52":"nothing","53":"nothing","54":"nothing","55":"nothing","56":"nothing","57":"nothing","60":"nothing","61":"nothing","62":"nothing","63":"nothing","64":"nothing","65":"nothing","66":"nothing","67":"nothing","70":"WhitePawn.png","71":"WhitePawn.png","72":"WhitePawn.png","73":"WhitePawn.png","74":"WhitePawn.png","75":"WhitePawn.png","76":"WhitePawn.png","77":"WhitePawn.png","80":"nothing","81":"WhiteKnight.png","82":"WhiteBishop.png","83":"nothing","84":"nothing","85":"WhiteBishop.png","86":"WhiteKnight.png","87":"nothing"},"Black",true,true,"","");
+let infomationOFPieces = {"10":"nothing", "11":"BlackKnight.png", "12":"BlackBishop.png","13":"nothing","14":"nothing","15":"BlackBishop.png","16":"BlackKnight.png","17":"nothing", "20":"BlackPawn.png","21":"BlackPawn.png","22":"BlackPawn.png","23":"BlackPawn.png","24":"BlackPawn.png","25":"BlackPawn.png","26":"BlackPawn.png","27":"BlackPawn.png","30":"nothing","31":"nothing","32":"nothing","33":"nothing","34":"nothing","35":"nothing","36":"nothing","37":"nothing","40":"nothing","41":"nothing","42":"nothing","43":"nothing","44":"nothing","45":"nothing","46":"nothing","47":"nothing","50":"nothing","51":"nothing","52":"nothing","53":"nothing","54":"nothing","55":"nothing","56":"nothing","57":"nothing","60":"nothing","61":"nothing","62":"nothing","63":"nothing","64":"nothing","65":"nothing","66":"nothing","67":"nothing","70":"WhitePawn.png","71":"WhitePawn.png","72":"WhitePawn.png","73":"WhitePawn.png","74":"WhitePawn.png","75":"WhitePawn.png","76":"WhitePawn.png","77":"WhitePawn.png","80":"nothing","81":"WhiteKnight.png","82":"WhiteBishop.png","83":"nothing","84":"nothing","85":"WhiteBishop.png","86":"WhiteKnight.png","87":"nothing"};
 const squares = document.querySelectorAll('.grid > div');
 let currentGoingPlayer = "Black";
 let previousSelected = "";
@@ -95,11 +95,17 @@ function initiliztion(event){
             previousSelected = map.dictionary[event.currentTarget.id];
             map.callBishop(event.currentTarget.id);
         }
-        
-        
+               
+    }
+
+    else if((previousSelected == "BlackBishop.png" || previousSelected == "WhiteBishop.png")){
+        console.log(" ++++++++++++++++++++++");
+        previousSelected = "";
+        map.callBishop(event.currentTarget.id);
         
     }
-    else if((previousSelected == "BlackKnight.png" || previousSelected == "WhiteKnight.png")){
+
+    else if((previousSelected === "BlackKnight.png" || previousSelected === "WhiteKnight.png")){
         console.log(" ++++++++++++++++++++++");
         previousSelected = "";
         map.callKnight(event.currentTarget.id);
@@ -107,6 +113,8 @@ function initiliztion(event){
     }
 
     else if((previousSelected == "") && (map.dictionary[event.currentTarget.id] == "BlackKnight.png" || map.dictionary[event.currentTarget.id] == "WhiteKnight.png")){
+        console.log("map.currentplayer " + map.currentPlayer);
+        console.log("substring " + colorOfPiece.substring(0,5));
         if(map.currentPlayer != colorOfPiece.substring(0,5)){
             alert("other player turn");
         }
