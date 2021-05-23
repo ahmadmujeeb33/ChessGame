@@ -22,9 +22,17 @@ class Knight{
             }
             else{
                 this.futurePosition = this.ID;
-                this.whiteMove = true;
-                this.currentPlayer = "Black";
-                //this.PlaceComputerPawns();              
+                this.whiteMove = true; 
+                //this.PlaceComputerPawns();  
+                if(this.PlaceKnight()){
+                    console.log("white golie");
+                    this.currentPlayer = "White";
+                }
+                else{
+                    this.currentPlayer = "Black";
+                }
+                
+                        
             }
         }
         else{
@@ -39,8 +47,14 @@ class Knight{
                 console.log("thenThis");
                 this.futurePosition = this.ID;
                 this.blackMove = true;
-                this.PlaceKnight();
-                this.currentPlayer = "White";
+                if(this.PlaceKnight()){
+                    console.log("black golie");
+                    this.currentPlayer = "Black";
+                }
+                else{
+                    this.currentPlayer = "White";
+                }
+               
                 //console.log("future " + this.futurePosition);
                
                 
@@ -52,10 +66,23 @@ class Knight{
 
 
     PlaceKnight(){
+        console.log("this.allitems " + this.allItems[this.futurePosition]);
+        console.log("this.id " + this.ID);
+        console.log("futureposition " + this.futurePosition);
+        console.log("currentPostion " + this.currentPosition);
         if(this.ValidKnightMove()){
+            console.log("in knight");
             let createImage = document.createElement("img");
             this.removeKnight(this.futurePosition);
-            this.allItems[this.futurePosition] = "BlackKnight.png";
+            if(this.currentPlayer === "Black"){
+                console.log("blackkkkkkkk");
+                this.allItems[this.futurePosition] = "BlackKnight.png";
+            }
+            else{
+                console.log("whiteeeeeeee");
+                this.allItems[this.futurePosition] = "WhiteKnight.png";
+            }
+            
             document.getElementById(this.futurePosition).appendChild(createImage);
             createImage.width = "35";
             createImage.height = "55";
@@ -63,9 +90,11 @@ class Knight{
             this.removeKnight(this.currentPosition);
         }
         else{
-            this.currentPlayer = "Black";
             console.log(" this does not work dsss");
             alert("Move not allowed");
+            return true;
+            
+
         }
     }
 
@@ -100,6 +129,9 @@ class Knight{
         while(myNode.hasChildNodes()){
             myNode.removeChild(myNode.childNodes[0]);
         }
+
+        console.log("this.currentpositon " + this.allItems[this.currentPosition]);
+        console.log("this.futurePosition " + this.allItems[this.futurePosition]);
         
         
     }
