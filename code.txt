@@ -1,0 +1,86 @@
+// document.getElementById.addEventListener("click",PlaceImage());
+
+// let nameVal = document.getElementById("10");
+// nameVal.addEventListener("click",PlacePonds);
+
+const squares = document.querySelectorAll('.grid > div');
+console.log(squares.length);
+for(let i = 0; i< squares.length;i++){
+    console.log("in here5")
+    squares[i].addEventListener('click',onSquareClicked);
+};
+// const chosen = document.getElementById("00");
+// chosen.addEventListener('click',event =>{
+
+//     if(event.currentTarget.querySelector('img')){
+//         CurrentPonds("00");
+//     }
+//     else{
+//         PlacePonds();
+//     }
+
+// });
+
+// const chosen1 = document.getElementById("10")
+// chosen1.addEventListener('click',event =>{
+
+//     if(event.currentTarget.querySelector('img')){
+//         CurrentPonds("10");
+//     }
+//     else{
+//         PlacePonds("10");
+//     }
+
+// });
+
+let chosenElement = "";
+let allItems = {"00":"Pawns.png", "10":"nothing"};
+
+function onSquareClicked(event){
+    if(event.currentTarget.querySelector('img')){
+        console.log(this.id);
+        CurrentPonds(this.id);
+    }
+    else{
+        console.log(this.id);
+        PlacePonds(this.id);
+    }
+
+}
+
+
+
+function PlacePonds(value){
+    let createImage = document.createElement("img");
+    console.log(value);
+    allItems[value] = "Pawns.png";
+    document.getElementById(value).appendChild(createImage);
+    createImage.width = "60";
+    createImage.height = "60";
+    createImage.src = allItems[chosenElement];
+    console.log("chosenElement " + chosenElement)
+    removePonds(chosenElement);
+    
+}
+
+function CurrentPonds(position){
+    chosenElement = position;
+}
+
+function removePonds(elementToRemove){
+    const myNode = document.getElementById(elementToRemove);
+    allItems[elementToRemove] = "nothing";
+    console.log(myNode.childNodes);
+    if(myNode.hasChildNodes()){
+        console.log("in here");
+        console.log(myNode.childNodes[0]);
+        myNode.removeChild(myNode.childNodes[1]);
+    }
+    if(myNode.hasChildNodes()){
+        console.log("in here2");
+        console.log(myNode.childNodes[0]);
+    }
+    console.log(allItems["00"])
+    console.log(allItems["10"])
+    
+}

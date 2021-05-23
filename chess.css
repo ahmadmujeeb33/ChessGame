@@ -1,0 +1,29 @@
+body{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background-color: teal;
+}
+
+
+.background-Layout{
+    display: grid;
+    background-color: teal;
+    grid-template-columns: repeat(8,60px);
+    height: 400px;
+    width: 400px;
+}
+
+.black{
+    background-color: gray;
+    height:60px;
+}
+
+.white{
+    background-color: white;
+    height:60px;
+}
+.p{
+    background-color:white;
+}
+
