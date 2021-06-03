@@ -57,7 +57,40 @@ class Rook{
     }
 
     PlaceRook(){
-        
+        if(this.ValidRookMove()){
+            ;
+        }
+    }
+
+    ValidRookMove(){
+        let currentPositionRow = parseInt(this.currentPosition);
+        let currentPositionColumn  = Math.floor(currentPositionRow % 10);
+        currentPositionRow = Math.floor(currentPositionRow/10);
+        let futurePositionRow = parseInt(this.futurePosition);
+        let futurePositionColumn = Math.floor(futurePositionRow % 10);
+        futurePositionRow = Math.floor(futurePositionRow/10);
+
+        if(futurePositionRow > currentPositionRow){
+            for(let i=currentPositionRow + 1;i<futurePositionRow;i++){  
+                let combine = "";
+                combine+=i;
+                combine+=currentPositionColumn;
+                if(this.allItems[combine] !="nothing"){
+                    return false
+                }
+            }
+        }
+        else if(futurePositionRow < currentPositionRow){
+            for(let i=currentPositionRow-1;i>futurePositionRow;i--){
+                let combine = "";
+                combine+=i;
+                combine+=currentPositionColumn;
+                if(this.allItems[combine] !="nothing"){
+                    return false
+                }
+            }
+        }
+
     }
 
 }
