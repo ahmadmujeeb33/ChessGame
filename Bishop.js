@@ -200,7 +200,7 @@ class Bishop{
     
          
             
-        if((currentPositionColumn!=futurePositionColumn) && (currentPositionRow!=futurePositionRow) && (this.allItems[this.futurePosition] == "nothing")){
+        if((currentPositionColumn!=futurePositionColumn) && (currentPositionRow!=futurePositionRow) && (this.allItems[this.futurePosition] == "nothing") && (Math.abs(futurePositionColumn-currentPositionColumn) === Math.abs(futurePositionRow-currentPositionRow))){
             return true;
         }
         else{
