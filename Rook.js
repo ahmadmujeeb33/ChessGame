@@ -91,6 +91,39 @@ class Rook{
             }
         }
 
+        else if(futurePositionColumn > currentPositionColumn){
+            for(let i=currentPositionColumn + 1;i<futurePositionColumn;i++){
+                let combine = "";
+                combine+=currentPositionRow;
+                combine+=i;
+                if(this.allItems[combine] !="nothing"){
+                    return false
+                }
+            }
+        }
+        else{
+            for(let i=futurePositionColumn - 1;i>currentPositionColumn;i--){
+                let combine = "";
+                combine+=currentPositionRow;
+                combine+=i;
+                if(this.allItems[combine] !="nothing"){
+                    return false
+                }
+            }
+        }
+
+        if(((currentPositionColumn === futurePositionColumn) || (currentPositionRow === futurePositionRow))){
+            if(this.currentPlayer !== this.allItems[this.futurePosition].substring(0,5)){
+                console.log("in herekjldnxl");
+                return true;
+            } 
+
+            return false;
+        }
+        else{
+            return false;
+        }
+
     }
 
 }
