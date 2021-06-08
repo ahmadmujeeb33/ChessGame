@@ -58,7 +58,19 @@ class Rook{
 
     PlaceRook(){
         if(this.ValidRookMove()){
-            ;
+            let createImage = document.createElement("img");
+            this.removePonds(this.futurePosition);
+            this.allItems[this.futurePosition] = "BlackRook.png";
+            document.getElementById(this.futurePosition).appendChild(createImage);
+            createImage.width = "40";
+            createImage.height = "50";
+            createImage.src = this.allItems[this.currentPosition];
+            this.removePonds(this.currentPosition);
+        }
+
+        else{
+            alert("Move not allowed");
+            this.currentPlayer =  "White";
         }
     }
 
@@ -124,6 +136,14 @@ class Rook{
             return false;
         }
 
+    }
+
+    removeRook(elementToRemove){
+        this.allItems[elementToRemove] = "nothing";
+        while(myNode.hasChildNodes()){
+            myNode.removeChild(myNode.childNodes[0]);
+        }
+       
     }
 
 }
