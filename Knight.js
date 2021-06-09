@@ -66,10 +66,6 @@ class Knight{
 
 
     PlaceKnight(){
-        console.log("this.allitems " + this.allItems[this.futurePosition]);
-        console.log("this.id " + this.ID);
-        console.log("futureposition " + this.futurePosition);
-        console.log("currentPostion " + this.currentPosition);
         if(this.ValidKnightMove()){
             console.log("in knight");
             let createImage = document.createElement("img");

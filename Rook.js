@@ -1,4 +1,5 @@
 class Rook{
+    
     constructor(squares,currentPosition,futurePosition,currentPlayer,blackMove,whiteMove,allItems,ID){
         this.squares = squares;
         this.currentPosition = currentPosition;
@@ -9,51 +10,44 @@ class Rook{
         this.allItems = allItems;
         this.ID = ID;
         this.onSquareClicked();
+        // for(let i = 0; i< squares.length;i++){
+        //     squares[i].addEventListener('click',this.onSquareClicked);
+        // };
     }
 
     onSquareClicked(){
         if(this.currentPlayer == "White"){
-    
+        
             if(this.whiteMove == true){
                 this.currentPosition = this.ID;
                 this.whiteMove = false;
             }
             else{
                 this.futurePosition = this.ID;
-                this.whiteMove = true; 
-                //this.PlaceComputerPawns();  
-                if(this.PlaceRook()){
-                    console.log("white golie");
-                    this.currentPlayer = "White";
-                }
-                else{
-                    this.currentPlayer = "Black";
-                }
-                
-                        
+                this.whiteMove = true;
+                this.currentPlayer = "Black";
+                this.PlaceRook();              
             }
         }
         else{
             if(this.blackMove == true){
-                console.log("firstThis");
                 this.currentPosition = this.ID;
                 this.blackMove = false;
-                //console.log("current " + this.currentPosition);
-               
+                
+            
             }
             else{
-                console.log("thenThis");
                 this.futurePosition = this.ID;
                 this.blackMove = true;
-                if(this.PlaceRook()){
-                    this.currentPlayer = "Black";
-                }
-                else{
-                    this.currentPlayer = "White";
-                }
-                       
+                this.currentPlayer = "White";
+                console.log("wereeeeeeeeeeeeeeee");
+                this.PlaceRook();
+                
+                
+                
             }
         }
+
     }
 
     PlaceRook(){
@@ -145,5 +139,30 @@ class Rook{
         }
        
     }
+
+    getDictionary(){
+        return this.allItems;
+    }
+    
+    getCurrentPlayer(){
+        return this.currentPlayer;
+    }
+
+    getBlackMove(){
+        return this.blackMove;
+    }
+    
+    getWhiteMove(){
+        return this.whiteMove;
+    }
+
+    getCurrentPosition(){
+        return this.currentPosition;
+    }
+    
+    getFuturePosition(){
+        return this.futurePosition;
+    }
+
 
 }
