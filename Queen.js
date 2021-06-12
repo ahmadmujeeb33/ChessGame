@@ -10,10 +10,51 @@ class Queen{
         this.allItems = allItems;
         this.ID = ID;
         this.onSquareClicked();
-        // for(let i = 0; i< squares.length;i++){
-        //     squares[i].addEventListener('click',this.onSquareClicked);
-        // };
     }
+
+    
+    onSquareClicked(){
+        
+        console.log("----------------------------------");
+        console.log("whiteMove1 " + this.whiteMove);
+        console.log("blackMove1 " + this.blackMove);
+        console.log("currentPlayer " + this.currentPlayer);
+        if(this.currentPlayer == "White"){
+    
+            if(this.whiteMove == true){
+                this.currentPosition = this.ID;
+                this.whiteMove = false;
+            }
+            else{
+                this.futurePosition = this.ID;
+                this.whiteMove = true;
+                this.currentPlayer = "Black";
+                this.PlaceComputerBishop();              
+            }
+        }
+        else{
+            if(this.blackMove == true){
+                this.currentPosition = this.ID;
+                this.blackMove = false;
+                
+            
+            }
+            else{
+                this.futurePosition = this.ID;
+                this.blackMove = true;
+                this.currentPlayer = "White";
+                console.log("wereeeeeeeeeeeeeeee");
+                this.PlaceBishop();
+                
+                
+                
+            }
+        }
+
+    
+
+
+}
 
 
 
