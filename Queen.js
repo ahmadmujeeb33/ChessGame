@@ -69,22 +69,120 @@ class Queen{
         futurePositionRow = Math.floor(futurePositionRow/10);
 
         if((Math.abs(futurePositionColumn-currentPositionColumn) === Math.abs(futurePositionRow-currentPositionRow)) && this.currentPlayer !== this.allItems[this.futurePosition].substring(0,5)){
-            
+            if(this.CheckDiagonal(currentPositionRow,currentPositionColumn,futurePositionRow,futurePositionColumn)){
+                return true;
+            }
         }
         else if((currentPositionColumn === futurePositionColumn) || (currentPositionRow === futurePositionRow) && this.currentPlayer !== this.allItems[this.futurePosition].substring(0,5)){
+            if(this.CheckSides(currentPositionRow,currentPositionColumn,futurePositionRow,futurePositionColumn)){
+                return true;
+            }
+        }
+        
+        return false;
+        
+    }
+
+    CheckDiagonal(currentPositionRow,currentPositionColumn,futurePositionRow,futurePositionColumn){
+        let combine = "";
+
+        if((currentPositionColumn < futurePositionColumn) && (currentPositionRow < futurePositionRow)){
+            let j = currentPositionRow+1;
+            for(let i = currentPositionColumn + 1; i<futurePositionColumn;i++){
+                combine = "";
+                combine +=j;
+                combine+=i;
+                if(this.allItems[combine] != "nothing"){
+                    return false;
+                }
+                j+=1;
+                
+            }
+        }
+        else if(( currentPositionRow < futurePositionRow) && (futurePositionColumn < currentPositionColumn)){
+            let j  = currentPositionRow + 1;
+            for(let i = currentPositionColumn - 1; i>futurePositionColumn;i--){
+                combine = "";
+                combine+=j;
+                combine+=i;
+                if(this.allItems[combine] != "nothing"){
+                    return false;
+                }
+                j+=1;
+            }
+        }
+        else if((currentPositionColumn < futurePositionColumn) && (currentPositionRow>futurePositionRow)){
+            let j  = currentPositionRow - 1;
+            for(let i = currentPositionColumn + 1; i<futurePositionColumn;i++){
+                combine = "";
+                combine +=j;
+                combine+=i;
+                if(this.allItems[combine] != "nothing"){
+                    return false;
+                }
+                j-=1;
+                
+            }
 
         }
         else{
-            return false;
+            console.log("thisherei398623592");
+            let j  = currentPositionRow-1;
+            for(let i = currentPositionColumn - 1; i>futurePositionColumn;i--){
+                combine = "";
+                combine+=j;
+                combine+=i;
+                if(this.allItems[combine] != "nothing"){
+                    return false;
+                }
+                j-=1;
+            }
         }
+    
     }
 
-    CheckDiagonal(){
+    CheckSides(currentPositionRow,currentPositionColumn,futurePositionRow,futurePositionColumn){
+        if(futurePositionRow > currentPositionRow){
+            for(let i=currentPositionRow + 1;i<futurePositionRow;i++){  
+                let combine = "";
+                combine+=i;
+                combine+=currentPositionColumn;
+                if(this.allItems[combine] !="nothing"){
+                    return false
+                }
+            }
+        }
+        else if(futurePositionRow < currentPositionRow){
+            for(let i=currentPositionRow-1;i>futurePositionRow;i--){
+                let combine = "";
+                combine+=i;
+                combine+=currentPositionColumn;
+                if(this.allItems[combine] !="nothing"){
+                    return false
+                }
+            }
+        }
 
-    }
-
-    CheckSides(){
-
+        else if(futurePositionColumn > currentPositionColumn){
+            for(let i=currentPositionColumn + 1;i<futurePositionColumn;i++){
+                let combine = "";
+                combine+=currentPositionRow;
+                combine+=i;
+                if(this.allItems[combine] !="nothing"){
+                    return false
+                }
+            }
+        }
+        else{
+            for(let i=futurePositionColumn - 1;i>currentPositionColumn;i--){
+                let combine = "";
+                combine+=currentPositionRow;
+                combine+=i;
+                if(this.allItems[combine] !="nothing"){
+                    return false
+                }
+            }
+        }
     }
 
 
