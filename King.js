@@ -21,50 +21,59 @@ class King{
             }
             else{
                 this.futurePosition = this.ID;
-                this.whiteMove = true; 
-                //this.PlaceComputerPawns();  
+                this.whiteMove = true;  
                 if(this.PlaceKing()){
                     this.currentPlayer = "White";
                 }
                 else{
                     this.currentPlayer = "Black";
-                }
-                
-                        
+                }                                    
             }
         }
         else{
             if(this.blackMove == true){
                 this.currentPosition = this.ID;
                 this.blackMove = false;
-                //console.log("current " + this.currentPosition);
-               
             }
             else{
                 this.futurePosition = this.ID;
                 this.blackMove = true;
                 if(this.PlaceKing()){
-                    console.log("black golie");
                     this.currentPlayer = "Black";
                 }
                 else{
                     this.currentPlayer = "White";
                 }
-               
-                //console.log("future " + this.futurePosition);
-               
-                
-                
-                
             }
         }
 
     }
 
 
+    PlaceKing(){
+        if(this.ValidKingMove()){
 
+        }
+    }
 
+    ValidKingMove(){
+        let currentPositionRow = parseInt(this.currentPosition);
+        let currentPositionColumn  = Math.floor(currentPositionRow % 10);
+        currentPositionRow = Math.floor(currentPositionRow/10);
+        let futurePositionRow = parseInt(this.futurePosition);
+        let futurePositionColumn = Math.floor(futurePositionRow % 10);
+        futurePositionRow = Math.floor(futurePositionRow/10);
 
+        if((currentPositionColumn!=futurePositionColumn) && (currentPositionRow!=futurePositionRow) && Math.abs(currentPositionRow - futurePositionRow) < 2 && Math.abs(currentPositionColumn - futurePositionColumn) < 2){
+            if(this.currentPlayer !== this.allItems[this.futurePosition].substring(0,5)){
+                return true;
+            } 
+            return false;
+        }
+
+        return false;
+
+    }
 
 
 }
