@@ -52,6 +52,26 @@ class King{
 
     PlaceKing(){
         if(this.ValidKingMove()){
+            let createImage = document.createElement("img");
+            this.removeKing(this.futurePosition);
+            if(this.currentPlayer === "Black"){
+                this.allItems[this.futurePosition] = "BlackKing.png";
+            }
+            else{
+                this.allItems[this.futurePosition] = "WhiteKing.png";
+            }
+            
+            document.getElementById(this.futurePosition).appendChild(createImage);
+            createImage.width = "35";
+            createImage.height = "55";
+            createImage.src = this.allItems[this.currentPosition];
+            this.removeKing(this.currentPosition);
+        }
+        else{
+            console.log(" this does not work dsss");
+            alert("Move not allowed");
+            return true;
+            
 
         }
     }
@@ -73,6 +93,15 @@ class King{
 
         return false;
 
+    }
+
+    removeKing(elementToRemove){
+        this.allItems[elementToRemove] = "nothing";
+        const myNode = document.getElementById(elementToRemove);
+        while(myNode.hasChildNodes()){
+            myNode.removeChild(myNode.childNodes[0]);
+        }
+       
     }
 
 
