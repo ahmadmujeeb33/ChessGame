@@ -15,7 +15,7 @@ This is an a mulitplayer chess game where users can play against each other
 
 ##Images 
 
-<img src = "chess.png">
+<img src="chess.png">
 
 ## Contact
 
