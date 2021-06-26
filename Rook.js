@@ -17,31 +17,48 @@ class Rook{
 
     onSquareClicked(){
         if(this.currentPlayer == "White"){
-        
+    
             if(this.whiteMove == true){
                 this.currentPosition = this.ID;
                 this.whiteMove = false;
             }
             else{
                 this.futurePosition = this.ID;
-                this.whiteMove = true;
-                this.currentPlayer = "Black";
-                this.PlaceRook();              
+                this.whiteMove = true; 
+                //this.PlaceComputerPawns();  
+                if(this.PlaceRook()){
+                    console.log("white golie");
+                    this.currentPlayer = "White";
+                }
+                else{
+                    this.currentPlayer = "Black";
+                }
+                
+                        
             }
         }
         else{
             if(this.blackMove == true){
+                console.log("firstThis");
                 this.currentPosition = this.ID;
                 this.blackMove = false;
-                
-            
+                //console.log("current " + this.currentPosition);
+               
             }
             else{
+                console.log("thenThis");
                 this.futurePosition = this.ID;
                 this.blackMove = true;
-                this.currentPlayer = "White";
-                console.log("wereeeeeeeeeeeeeeee");
-                this.PlaceRook();
+                if(this.PlaceRook()){
+                    console.log("black golie");
+                    this.currentPlayer = "Black";
+                }
+                else{
+                    this.currentPlayer = "White";
+                }
+               
+                //console.log("future " + this.futurePosition);
+               
                 
                 
                 
@@ -53,18 +70,26 @@ class Rook{
     PlaceRook(){
         if(this.ValidRookMove()){
             let createImage = document.createElement("img");
-            this.removePonds(this.futurePosition);
-            this.allItems[this.futurePosition] = "BlackRook.png";
+            this.removeRook(this.futurePosition);
+            if(this.currentPlayer === "Black"){
+                this.allItems[this.futurePosition] = "BlackRook.png";
+            }
+            else{
+                this.allItems[this.futurePosition] = "WhiteRook.png";
+            }
+            
             document.getElementById(this.futurePosition).appendChild(createImage);
-            createImage.width = "40";
-            createImage.height = "50";
+            createImage.width = "35";
+            createImage.height = "55";
             createImage.src = this.allItems[this.currentPosition];
-            this.removePonds(this.currentPosition);
+            this.removeRook(this.currentPosition);
         }
-
         else{
+            console.log(" this does not work dsss");
             alert("Move not allowed");
-            this.currentPlayer =  "White";
+            return true;
+            
+
         }
     }
 
@@ -134,6 +159,7 @@ class Rook{
 
     removeRook(elementToRemove){
         this.allItems[elementToRemove] = "nothing";
+        const myNode = document.getElementById(elementToRemove);
         while(myNode.hasChildNodes()){
             myNode.removeChild(myNode.childNodes[0]);
         }
@@ -155,7 +181,6 @@ class Rook{
     getWhiteMove(){
         return this.whiteMove;
     }
-
     getCurrentPosition(){
         return this.currentPosition;
     }
@@ -163,6 +188,4 @@ class Rook{
     getFuturePosition(){
         return this.futurePosition;
     }
-
-
 }

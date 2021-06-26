@@ -62,8 +62,8 @@ class King{
             }
             
             document.getElementById(this.futurePosition).appendChild(createImage);
-            createImage.width = "35";
-            createImage.height = "55";
+            createImage.width = "55";
+            createImage.height = "60";
             createImage.src = this.allItems[this.currentPosition];
             this.removeKing(this.currentPosition);
         }
@@ -84,7 +84,7 @@ class King{
         let futurePositionColumn = Math.floor(futurePositionRow % 10);
         futurePositionRow = Math.floor(futurePositionRow/10);
 
-        if((currentPositionColumn!=futurePositionColumn) && (currentPositionRow!=futurePositionRow) && Math.abs(currentPositionRow - futurePositionRow) < 2 && Math.abs(currentPositionColumn - futurePositionColumn) < 2){
+        if( Math.abs(currentPositionRow - futurePositionRow) < 2 && Math.abs(currentPositionColumn - futurePositionColumn) < 2){
             if(this.currentPlayer !== this.allItems[this.futurePosition].substring(0,5)){
                 return true;
             } 
@@ -101,7 +101,29 @@ class King{
         while(myNode.hasChildNodes()){
             myNode.removeChild(myNode.childNodes[0]);
         }
-       
+    }
+
+    getDictionary(){
+        return this.allItems;
+    }
+    
+    getCurrentPlayer(){
+        return this.currentPlayer;
+    }
+
+    getBlackMove(){
+        return this.blackMove;
+    }
+    
+    getWhiteMove(){
+        return this.whiteMove;
+    }
+    getCurrentPosition(){
+        return this.currentPosition;
+    }
+    
+    getFuturePosition(){
+        return this.futurePosition;
     }
 
 

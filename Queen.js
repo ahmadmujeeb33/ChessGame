@@ -14,48 +14,66 @@ class Queen{
 
     
     onSquareClicked(){
-        
-        console.log("----------------------------------");
-        console.log("whiteMove1 " + this.whiteMove);
-        console.log("blackMove1 " + this.blackMove);
-        console.log("currentPlayer " + this.currentPlayer);
         if(this.currentPlayer == "White"){
-    
             if(this.whiteMove == true){
                 this.currentPosition = this.ID;
                 this.whiteMove = false;
             }
             else{
                 this.futurePosition = this.ID;
-                this.whiteMove = true;
-                this.currentPlayer = "Black";
-                this.PlaceQueen();              
+                this.whiteMove = true; 
+                if(this.PlaceQueen()){
+                    this.currentPlayer = "White";
+                }
+                else{
+                    this.currentPlayer = "Black";
+                }              
+                        
             }
         }
         else{
             if(this.blackMove == true){
                 this.currentPosition = this.ID;
                 this.blackMove = false;
-                
-            
             }
             else{
                 this.futurePosition = this.ID;
                 this.blackMove = true;
-                this.currentPlayer = "White";
-                console.log("wereeeeeeeeeeeeeeee");
-                this.PlaceQueen();
-                
-                
+                if(this.PlaceQueen()){
+                    this.currentPlayer = "Black";
+                }
+                else{
+                    this.currentPlayer = "White";
+                }          
                 
             }
         }
+        
 
     }
 
 
     PlaceQueen(){
         if(this.ValidQueenMove()){
+            let createImage = document.createElement("img");
+            this.RemoveQueen(this.futurePosition);
+            if(this.currentPlayer === "Black"){
+                this.allItems[this.futurePosition] = "BlackQueen.png";
+            }
+            else{
+                this.allItems[this.futurePosition] = "WhiteQueen.png";
+            }
+            
+            document.getElementById(this.futurePosition).appendChild(createImage);
+            createImage.width = "60";
+            createImage.height = "60";
+            createImage.src = this.allItems[this.currentPosition];
+            this.RemoveQueen(this.currentPosition);
+        }
+        else{
+            alert("Move not allowed");
+            return true;
+            
 
         }
     }
@@ -68,12 +86,19 @@ class Queen{
         let futurePositionColumn = Math.floor(futurePositionRow % 10);
         futurePositionRow = Math.floor(futurePositionRow/10);
 
-        if((Math.abs(futurePositionColumn-currentPositionColumn) === Math.abs(futurePositionRow-currentPositionRow)) && this.currentPlayer !== this.allItems[this.futurePosition].substring(0,5)){
+        console.log("columns " + Math.abs(futurePositionColumn-currentPositionColumn))
+        console.log("row " + Math.abs(futurePositionRow-currentPositionRow))
+
+        console.log("currentplayer " + this.currentPlayer);
+        console.log("futureposition " + this.allItems[this.futurePosition].substring(0,5));
+
+        if((Math.abs(futurePositionColumn-currentPositionColumn) === Math.abs(futurePositionRow-currentPositionRow)) && (this.currentPlayer !== this.allItems[this.futurePosition].substring(0,5))){
+            console.log("thfildxfn");
             if(this.CheckDiagonal(currentPositionRow,currentPositionColumn,futurePositionRow,futurePositionColumn)){
                 return true;
             }
         }
-        else if((currentPositionColumn === futurePositionColumn) || (currentPositionRow === futurePositionRow) && this.currentPlayer !== this.allItems[this.futurePosition].substring(0,5)){
+        else if(((currentPositionColumn === futurePositionColumn) || (currentPositionRow === futurePositionRow)) && (this.currentPlayer !== this.allItems[this.futurePosition].substring(0,5))){
             if(this.CheckSides(currentPositionRow,currentPositionColumn,futurePositionRow,futurePositionColumn)){
                 return true;
             }
@@ -126,7 +151,6 @@ class Queen{
 
         }
         else{
-            console.log("thisherei398623592");
             let j  = currentPositionRow-1;
             for(let i = currentPositionColumn - 1; i>futurePositionColumn;i--){
                 combine = "";
@@ -138,7 +162,7 @@ class Queen{
                 j-=1;
             }
         }
-    
+        return true;
     }
 
     CheckSides(currentPositionRow,currentPositionColumn,futurePositionRow,futurePositionColumn){
@@ -183,6 +207,39 @@ class Queen{
                 }
             }
         }
+
+        return true;
+    }
+
+    RemoveQueen(elementToRemove){
+        this.allItems[elementToRemove] = "nothing";
+        const myNode = document.getElementById(elementToRemove);
+        while(myNode.hasChildNodes()){
+            myNode.removeChild(myNode.childNodes[0]);
+        }
+    }
+
+    getDictionary(){
+        return this.allItems;
+    }
+    
+    getCurrentPlayer(){
+        return this.currentPlayer;
+    }
+
+    getBlackMove(){
+        return this.blackMove;
+    }
+    
+    getWhiteMove(){
+        return this.whiteMove;
+    }
+    getCurrentPosition(){
+        return this.currentPosition;
+    }
+    
+    getFuturePosition(){
+        return this.futurePosition;
     }
 
 
