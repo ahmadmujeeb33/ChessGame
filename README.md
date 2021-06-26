@@ -1,19 +1,19 @@
 # ChessGame
 
-##Link to Application 
+## Link to Application 
 
 https://ahmadmujeeb33.github.io/ChessGame/
 
 
-##Technoalgaies Used
+## Technoalgaies Used
 
 HTML,CSS,Javascript
 
-##Description
+## Description
 
 This is an a mulitplayer chess game where users can play against each other
 
-##Images 
+## Images 
 
 <img src="chess.png">
 
