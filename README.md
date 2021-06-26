@@ -1,9 +1,5 @@
 # ChessGame
 
-
-# ChessGame
-
-
 ##Link to Application 
 
 https://ahmadmujeeb33.github.io/ChessGame/
@@ -19,7 +15,7 @@ This is an a mulitplayer chess game where users can play against each other
 
 ##Images 
 
-<img src = "chess.PNG">
+<img src = "chess.png">
 
 ## Contact
 
