@@ -102,7 +102,6 @@ class King{
             myNode.removeChild(myNode.childNodes[0]);
         }
     }
-
     getDictionary(){
         return this.allItems;
     }
