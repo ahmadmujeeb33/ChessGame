@@ -20,12 +20,10 @@ class Pawns{
 
 onSquareClicked(){
 
-        console.log("----------------------------------");
-        console.log("whiteMove2 " + this.whiteMove);
-        console.log("blackMove2 " + this.blackMove);
         //this.moveAllReadyMade = true;
+                //this.moveAllReadyMade = true;
         if(this.currentPlayer == "White"){
-    
+
             if(this.whiteMove == true){
                 this.currentPosition = this.ID;
                 this.whiteMove = false;
@@ -43,7 +41,7 @@ onSquareClicked(){
                 this.currentPosition = this.ID;
                 this.blackMove = false;
                 //console.log("current " + this.currentPosition);
-               
+                
             }
             else{
                 console.log("thenThis");
@@ -51,10 +49,7 @@ onSquareClicked(){
                 this.blackMove = true;
                 this.currentPlayer = "White";
                 //console.log("future " + this.futurePosition);
-                this.PlacePonds();
-                
-                
-                
+                this.PlacePonds();            
             }
         }
     }
@@ -67,7 +62,7 @@ onSquareClicked(){
 
 
 PlacePonds(){
-    if(this.attackComputer()){
+    if(this.attackComputer() || this.CheckValidPawnMove()){
         let createImage = document.createElement("img");
         this.removePonds(this.futurePosition);
         this.allItems[this.futurePosition] = "BlackPawn.png";
@@ -77,17 +72,6 @@ PlacePonds(){
         createImage.src = this.allItems[this.currentPosition];
         this.removePonds(this.currentPosition);
         
-    }
-    else if(this.CheckValidPawnMove()){
-        console.log("this again ");
-        let createImage = document.createElement("img");
-        this.allItems[this.futurePosition] = "BlackPawn.png";
-        document.getElementById(this.futurePosition).appendChild(createImage);
-        console.log("we here again");
-        createImage.width = "60";
-        createImage.height = "60";
-        createImage.src = this.allItems[this.currentPosition];
-        this.removePonds(this.currentPosition);
     }
     else{
         alert("Move not allowed");
@@ -111,19 +95,9 @@ removePonds(elementToRemove){
 }
 
 PlaceComputerPawns(){
-    if(this.attackPlayer()){
+    if(this.attackPlayer() || this.checkValidPawnForComputer()){
         let createImage = document.createElement("img");
         this.removePonds(this.futurePosition);
-        this.allItems[this.futurePosition] = "WhitePawn.png";
-        document.getElementById(this.futurePosition).appendChild(createImage);
-        createImage.width = "40";
-        createImage.height = "50";
-        createImage.src = this.allItems[this.currentPosition];
-        this.removePonds(this.currentPosition);
-    }
-    else if(this.checkValidPawnForComputer()){
-        let createImage = document.createElement("img");
-        //console.log(value);
         this.allItems[this.futurePosition] = "WhitePawn.png";
         document.getElementById(this.futurePosition).appendChild(createImage);
         createImage.width = "40";
@@ -150,7 +124,7 @@ CheckValidPawnMove(){
     
     if(this.currentPosition[0] == '2'){
         
-        if((numericalCurrentPosition>=numericalFutureposition-2) && (numericalCurrentPosition!=numericalFutureposition) && (numericalFutureposition>numericalCurrentPosition) && (numericalCurrentPositionRemainder == numericalFuturepositionRemainder) && (this.allItems[this.futurePosition] != "WhitePawn.png")){
+        if((numericalCurrentPosition>=numericalFutureposition-2) && (numericalCurrentPosition!=numericalFutureposition) && (numericalFutureposition>numericalCurrentPosition) && (numericalCurrentPositionRemainder == numericalFuturepositionRemainder) && (this.currentPlayer !== this.allItems[this.futurePosition].substring(0,5))){
             return true;
         }
         else{
@@ -159,7 +133,7 @@ CheckValidPawnMove(){
     }
     
     else{
-        if((numericalCurrentPosition>=numericalFutureposition-1) && (numericalCurrentPosition!=numericalFutureposition) && (numericalFutureposition>numericalCurrentPosition) && (numericalCurrentPositionRemainder == numericalFuturepositionRemainder) && (this.allItems[this.futurePosition] != "WhitePawn.png")){
+        if((numericalCurrentPosition>=numericalFutureposition-1) && (numericalCurrentPosition!=numericalFutureposition) && (numericalFutureposition>numericalCurrentPosition) && (numericalCurrentPositionRemainder == numericalFuturepositionRemainder) && (this.currentPlayer !== this.allItems[this.futurePosition].substring(0,5))){
             return true;
         }
         else{
@@ -177,7 +151,7 @@ checkValidPawnForComputer(){
     numericalFutureposition = Math.floor(numericalFutureposition/10);
 
     if(this.currentPosition[0] == '7'){
-        if((numericalCurrentPosition<=numericalFutureposition+2) && (numericalCurrentPosition!=numericalFutureposition) && (numericalCurrentPosition > numericalFutureposition) && (numericalCurrentPositionRemainder == numericalFuturepositionRemainder) && (this.allItems[this.futurePosition] != "BlackPawn.png")){
+        if((numericalCurrentPosition<=numericalFutureposition+2) && (numericalCurrentPosition!=numericalFutureposition) && (numericalCurrentPosition > numericalFutureposition) && (numericalCurrentPositionRemainder == numericalFuturepositionRemainder) && (this.currentPlayer !== this.allItems[this.futurePosition].substring(0,5))){
             return true;
         }
         else{
@@ -185,7 +159,7 @@ checkValidPawnForComputer(){
         }
     }
     else{
-        if((numericalCurrentPosition<=numericalFutureposition+1) && (numericalCurrentPosition!=numericalFutureposition) && (numericalCurrentPosition > numericalFutureposition) && (numericalCurrentPositionRemainder == numericalFuturepositionRemainder) && (this.allItems[this.futurePosition] != "BlackPawn.png")){
+        if((numericalCurrentPosition<=numericalFutureposition+1) && (numericalCurrentPosition!=numericalFutureposition) && (numericalCurrentPosition > numericalFutureposition) && (numericalCurrentPositionRemainder == numericalFuturepositionRemainder) && (this.currentPlayer !== this.allItems[this.futurePosition].substring(0,5))){
             return true;
         }
         else{
@@ -202,13 +176,6 @@ attackComputer(){
     let numericalFutureposition = parseInt(this.futurePosition);
     let numericalFuturepositionRemainder = Math.floor(numericalFutureposition % 10);
     numericalFutureposition = Math.floor(numericalFutureposition/10);
-
-    console.log(" this here ")
-
-    console.log(" numericalCurrentPosition " + numericalCurrentPosition);
-    console.log(" numericalCurrentPositionRemainder " + numericalCurrentPositionRemainder);
-    console.log("numericalFutureposition " + numericalFutureposition);
-    console.log(" numericalFuturepositionRemainder " + numericalFuturepositionRemainder);
 
 
     if((numericalCurrentPositionRemainder + 1 == numericalFuturepositionRemainder) && (numericalCurrentPosition + 1 == numericalFutureposition) && (this.allItems[this.futurePosition] != "nothing" )){
@@ -234,13 +201,6 @@ attackPlayer(){
     let numericalFutureposition = parseInt(this.futurePosition);
     let numericalFuturepositionRemainder = Math.floor(numericalFutureposition % 10);
     numericalFutureposition = Math.floor(numericalFutureposition/10);
-
-
-    console.log("thid is the one");
-    console.log(" numericalCurrentPosition " + numericalCurrentPosition);
-    console.log(" numericalCurrentPositionRemainder " + numericalCurrentPositionRemainder);
-    console.log("numericalFutureposition " + numericalFutureposition);
-    console.log(" numericalFuturepositionRemainder " + numericalFuturepositionRemainder);
 
     if((numericalCurrentPositionRemainder - 1 == numericalFuturepositionRemainder) && (numericalCurrentPosition - 1 == numericalFutureposition) && (this.allItems[this.futurePosition] != "nothing")){
         
