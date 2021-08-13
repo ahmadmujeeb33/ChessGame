@@ -27,7 +27,6 @@ class Rook{
                 this.whiteMove = true; 
                 //this.PlaceComputerPawns();  
                 if(this.PlaceRook()){
-                    console.log("white golie");
                     this.currentPlayer = "White";
                 }
                 else{
@@ -50,7 +49,7 @@ class Rook{
                 this.futurePosition = this.ID;
                 this.blackMove = true;
                 if(this.PlaceRook()){
-                    console.log("black golie");
+
                     this.currentPlayer = "Black";
                 }
                 else{
