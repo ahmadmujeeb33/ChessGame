@@ -77,6 +77,10 @@ class Pieces{
         this.currentPosition = board.getCurrentPosition();
         this.futurePosition = board.getFuturePosition();
     }
+
+    findCheck(){
+        let board = new Check(this.dictionary, this.currentPlayer);
+    }
 }
 
 
@@ -86,6 +90,8 @@ let infomationOFPieces = {"10":"BlackRook.png", "11":"BlackKnight.png", "12":"Bl
 const squares = document.querySelectorAll('.grid > div');
 let currentGoingPlayer = "Black";
 let previousSelected = "";
+let checkMade = true
+
 for(let i = 0; i< squares.length;i++){
     squares[i].addEventListener('click',initiliztion);
 };
@@ -107,7 +113,7 @@ function initiliztion(event){
     else if((previousSelected == "BlackPawn.png" || previousSelected == "WhitePawn.png")){
         previousSelected = "";
         map.callPawns(event.currentTarget.id);
-       
+        map.findCheck();
         
     }
     else if((previousSelected == "") && (map.dictionary[event.currentTarget.id] == "BlackBishop.png" || map.dictionary[event.currentTarget.id] == "WhiteBishop.png")){
