@@ -131,7 +131,7 @@ function initiliztion(event){
         console.log(" ++++++++++++++++++++++");
         previousSelected = "";
         map.callBishop(event.currentTarget.id);
-        
+        map.findCheck();
     }
 
     else if((previousSelected === "BlackKnight.png" || previousSelected === "WhiteKnight.png")){
