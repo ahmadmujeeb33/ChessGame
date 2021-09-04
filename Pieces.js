@@ -138,6 +138,7 @@ function initiliztion(event){
         console.log(" ++++++++++++++++++++++");
         previousSelected = "";
         map.callKnight(event.currentTarget.id);
+        map.findCheck();
         
     }
 
