@@ -3,6 +3,7 @@ class Check{
         this.currentPlayer = currentPlayer;
         this.allItems = allItems;
         this.allMoves = [];
+        this.oppisiteKingMoves = [];
         this.AllCombinations();
     }
 
@@ -35,7 +36,7 @@ class Check{
                
             // }
 
-            // if((this.allItems[position] === "BlackKnight.png") || (this.allItems[position] === "WhiteKnight.png")){
+            // else if((this.allItems[position] === "BlackKnight.png") || (this.allItems[position] === "WhiteKnight.png")){
             //     console.log("weeeeeeeeeeeeeeee")
             //     console.log("this.allItems[position].substring(0,5) " + this.allItems[position].substring(0,5));
             //     console.log(" this.currentPlayer " + this.currentPlayer);
@@ -45,15 +46,34 @@ class Check{
                
             // }
 
-            if((this.allItems[position] === "BlackRook.png") || (this.allItems[position] === "WhiteRook.png")){
+            // else if((this.allItems[position] === "BlackRook.png") || (this.allItems[position] === "WhiteRook.png")){
 
-                    if(this.allItems[position].substring(0,5) !== this.currentPlayer){
-                        this.GetRookMoves(position);
-                    }                
+            //     if(this.allItems[position].substring(0,5) !== this.currentPlayer){
+            //         this.GetRookMoves(position);
+            //     }                
 
+            // }
+
+            // else if((this.allItems[position] === "BlackQueen.png") || (this.allItems[position] === "WhiteQueen.png")){
+
+            //     if(this.allItems[position].substring(0,5) !== this.currentPlayer){
+            //         this.GetRookMoves(position);
+            //         this.GetBishopMoves(position);
+            //     }                
+    
+            // }
+
+            if((this.allItems[position] === "BlackKing.png") || (this.allItems[position] === "WhiteKing.png")){
+
+                if(this.allItems[position].substring(0,5) !== this.currentPlayer){
+                    this.GetKingMoves(position);
+                    
+                }                
+    
             }
 
             console.log(this.allMoves);
+            // console.log(this.oppisiteKingMoves);
             
 
         }
@@ -281,7 +301,7 @@ class Check{
         combine+=col
 
         console.log("combine1 " + combine);
-        this.CheckIfKnightValid(combine)
+        this.CheckKnightIfValid(combine)
 
         combine = "";
 
@@ -293,7 +313,7 @@ class Check{
         combine+=col
 
         console.log("combine2 " + combine);
-        this.CheckIfKnightValid(combine)
+        this.CheckKnightIfValid(combine)
 
         combine = "";
 
@@ -305,7 +325,7 @@ class Check{
         combine+=col
 
         console.log("combine3 " + combine);
-        this.CheckIfKnightValid(combine)
+        this.CheckKnightIfValid(combine)
 
         combine = "";
         
@@ -317,7 +337,7 @@ class Check{
         combine+=col;
 
         console.log("combine4 " + combine);
-        this.CheckIfKnightValid(combine)
+        this.CheckKnightIfValid(combine)
 
         combine = "";
 
@@ -329,7 +349,7 @@ class Check{
         combine+=col;
 
         console.log("combine5 " + combine);
-        this.CheckIfKnightValid(combine)
+        this.CheckKnightIfValid(combine)
 
         combine = "";
 
@@ -341,7 +361,7 @@ class Check{
         combine+=col
 
         console.log("combine6 " + combine);
-        this.CheckIfKnightValid(combine)
+        this.CheckKnightIfValid(combine)
 
         combine = "";
 
@@ -353,7 +373,7 @@ class Check{
         combine+=col;
 
         console.log("combine7 " + combine);
-        this.CheckIfKnightValid(combine)
+        this.CheckKnightIfValid(combine)
 
         combine = "";
 
@@ -364,16 +384,16 @@ class Check{
         combine+=col
 
         console.log("combine8 " + combine);
-        this.CheckIfKnightValid(combine)
+        this.CheckKnightIfValid(combine)
 
     }
-    CheckIfKnightValid(combine){
+    CheckKnightIfValid(combine){
         // console.log("combine12344 " + combine)
         if(this.allItems[combine] === undefined){
             ;
         }
         else if((this.allItems[combine] === "nothing") || (this.allItems[combine].substring(0,5) === this.currentPlayer)){
-            // console.log("combine123445678999 " + combine)
+            console.log("combine123445678999 " + combine)
             this.allMoves.push(combine);
         }
 
@@ -497,6 +517,120 @@ class Check{
 
 
        
+
+    }
+
+    // CheckIfValid(combine){
+    //     // console.log("combine12344 " + combine)
+    //     if(this.allItems[combine] === undefined){
+    //         ;
+    //     }
+    //     else if((this.allItems[combine] === "nothing") || (this.allItems[combine].substring(0,5) === this.currentPlayer)){
+    //         // console.log("combine123445678999 " + combine)
+    //         this.oppisiteKingMoves.push(combine);
+    //     }
+
+        
+
+    // }
+
+
+    GetKingMoves(currentPosition){
+        let currentPositionRow = parseInt(currentPosition);
+        let currentPositionColumn  = Math.floor(currentPositionRow % 10);
+        currentPositionRow = Math.floor(currentPositionRow/10);
+
+
+        let combine = "";
+        let row = currentPositionRow+1;
+        let col = currentPositionColumn+1;
+
+        combine+=row;
+        combine+=col;
+
+        console.log("combine1 " + combine)
+
+        this.CheckKnightIfValid(combine)
+
+        combine = "";
+        row = currentPositionRow;
+        col = currentPositionColumn+1;
+
+        combine+=row;
+        combine+=col;
+
+        console.log("combine2 " + combine)
+
+        this.CheckKnightIfValid(combine)
+
+        combine = "";
+        row = currentPositionRow + 1;
+        col = currentPositionColumn;
+
+        combine+=row;
+        combine+=col;
+
+        console.log("combine3 " + combine)
+
+        this.CheckKnightIfValid(combine)
+
+
+        combine = "";
+        row = currentPositionRow + 1;
+        col = currentPositionColumn - 1;
+
+        combine+=row;
+        combine+=col;
+
+        console.log("combine4 " + combine)
+
+        this.CheckKnightIfValid(combine)
+
+
+        combine = "";
+        row = currentPositionRow - 1;
+        col = currentPositionColumn;
+
+        combine+=row;
+        combine+=col;
+
+        console.log("combine5 " + combine)
+
+        this.CheckKnightIfValid(combine)
+
+
+        combine = "";
+        row = currentPositionRow - 1;
+        col = currentPositionColumn - 1;
+
+        combine+=row;
+        combine+=col;
+
+        console.log("combine6 " + combine)
+
+        this.CheckKnightIfValid(combine)
+
+
+        combine = "";
+        row = currentPositionRow;
+        col = currentPositionColumn - 1;
+
+        combine+=row;
+        combine+=col;
+
+        console.log("combine7 " + combine)
+        this.CheckKnightIfValid(combine)
+
+
+        combine = "";
+        row = currentPositionRow - 1;
+        col = currentPositionColumn + 1;
+
+        combine+=row;
+        combine+=col;
+
+        console.log("combine8 " + combine)
+        this.CheckKnightIfValid(combine)
 
     }
 

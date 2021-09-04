@@ -173,6 +173,7 @@ function initiliztion(event){
     else if((previousSelected === "BlackQueen.png" || previousSelected === "WhiteQueen.png")){
         previousSelected = "";
         map.callQueen(event.currentTarget.id);
+        map.findCheck();
         
     }
 
@@ -189,6 +190,7 @@ function initiliztion(event){
     else if((previousSelected === "BlackKing.png" || previousSelected === "WhiteKing.png")){
         previousSelected = "";
         map.callKing(event.currentTarget.id);
+        map.findCheck();
         
     }
 

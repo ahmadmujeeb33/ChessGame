@@ -84,7 +84,7 @@ class King{
         let futurePositionColumn = Math.floor(futurePositionRow % 10);
         futurePositionRow = Math.floor(futurePositionRow/10);
 
-        if( Math.abs(currentPositionRow - futurePositionRow) < 2 && Math.abs(currentPositionColumn - futurePositionColumn) < 2){
+        if(Math.abs(currentPositionRow - futurePositionRow) < 2 && Math.abs(currentPositionColumn - futurePositionColumn) < 2){
             if(this.currentPlayer !== this.allItems[this.futurePosition].substring(0,5)){
                 return true;
             } 
