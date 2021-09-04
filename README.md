@@ -4,7 +4,6 @@
 
 https://ahmadmujeeb33.github.io/ChessGame/
 
-
 ## Technoalgaies Used
 
 HTML,CSS,Javascript
