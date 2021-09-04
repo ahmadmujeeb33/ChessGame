@@ -79,7 +79,12 @@ class Pieces{
     }
 
     findCheck(){
-        let board = new Check(this.dictionary, this.currentPlayer);
+        let board = new Check(this.dictionary, this.currentPlayer, false);
+        let findCheck1 = board.GetCheckMade();
+        console.log("findCheck1 " + findCheck1);
+        if(findCheck1 === true){
+            setTimeout(function(){ alert("Check"); }, 500);
+        }
     }
 }
 

@@ -1,9 +1,11 @@
 class Check{
-    constructor(allItems,currentPlayer){
+    constructor(allItems,currentPlayer, checkMade){
         this.currentPlayer = currentPlayer;
         this.allItems = allItems;
         this.allMoves = [];
         this.oppisiteKingMoves = [];
+        this.oppisiteKing = "";
+        this.checkMade = checkMade;
         this.AllCombinations();
     }
 
@@ -14,60 +16,57 @@ class Check{
        
         for (const position in this.allItems) {
             console.log(`${position}: ${this.allItems[position]}`);
-            // if((this.allItems[position] === "BlackPawn.png") || (this.allItems[position] === "WhitePawn.png")){
-            //     if(this.allItems[position].substring(0,5) !== this.currentPlayer){
-            //         if(this.allItems[position] === "BlackPawn.png"){
-            //             this.GetBlackPawnMoves(position);
-            //         }
-            //         else{
-            //             this.GetWhitePawnMoves(position);
-            //         }
+            if((this.allItems[position] === "BlackPawn.png") || (this.allItems[position] === "WhitePawn.png")){
+                if(this.allItems[position].substring(0,5) !== this.currentPlayer){
+                    if(this.allItems[position] === "BlackPawn.png"){
+                        this.GetBlackPawnMoves(position);
+                    }
+                    else{
+                        this.GetWhitePawnMoves(position);
+                    }
                    
-            //     }
-            // }
+                }
+            }
 
-            // else if((this.allItems[position] === "BlackBishop.png") || (this.allItems[position] === "WhiteBishop.png")){
-            //     console.log("weeeeeeeeeeeeeeee")
-            //     console.log("this.allItems[position].substring(0,5) " + this.allItems[position].substring(0,5));
-            //     console.log(" this.currentPlayer " + this.currentPlayer);
-            //     if(this.allItems[position].substring(0,5) !== this.currentPlayer){
-            //         this.GetBishopMoves(position);
-            //     }
+            else if((this.allItems[position] === "BlackBishop.png") || (this.allItems[position] === "WhiteBishop.png")){
+                if(this.allItems[position].substring(0,5) !== this.currentPlayer){
+                    this.GetBishopMoves(position);
+                }
                
-            // }
+            }
 
-            // else if((this.allItems[position] === "BlackKnight.png") || (this.allItems[position] === "WhiteKnight.png")){
-            //     console.log("weeeeeeeeeeeeeeee")
-            //     console.log("this.allItems[position].substring(0,5) " + this.allItems[position].substring(0,5));
-            //     console.log(" this.currentPlayer " + this.currentPlayer);
-            //     if(this.allItems[position].substring(0,5) !== this.currentPlayer){
-            //         this.GetKnightMoves(position);
-            //     }
+            else if((this.allItems[position] === "BlackKnight.png") || (this.allItems[position] === "WhiteKnight.png")){
+                if(this.allItems[position].substring(0,5) !== this.currentPlayer){
+                    this.GetKnightMoves(position);
+                }
                
-            // }
+            }
 
-            // else if((this.allItems[position] === "BlackRook.png") || (this.allItems[position] === "WhiteRook.png")){
+            else if((this.allItems[position] === "BlackRook.png") || (this.allItems[position] === "WhiteRook.png")){
 
-            //     if(this.allItems[position].substring(0,5) !== this.currentPlayer){
-            //         this.GetRookMoves(position);
-            //     }                
+                if(this.allItems[position].substring(0,5) !== this.currentPlayer){
+                    this.GetRookMoves(position);
+                }                
 
-            // }
+            }
 
-            // else if((this.allItems[position] === "BlackQueen.png") || (this.allItems[position] === "WhiteQueen.png")){
+            else if((this.allItems[position] === "BlackQueen.png") || (this.allItems[position] === "WhiteQueen.png")){
 
-            //     if(this.allItems[position].substring(0,5) !== this.currentPlayer){
-            //         this.GetRookMoves(position);
-            //         this.GetBishopMoves(position);
-            //     }                
+                if(this.allItems[position].substring(0,5) !== this.currentPlayer){
+                    this.GetRookMoves(position);
+                    this.GetBishopMoves(position);
+                }                
     
-            // }
+            }
 
-            if((this.allItems[position] === "BlackKing.png") || (this.allItems[position] === "WhiteKing.png")){
+            else if((this.allItems[position] === "BlackKing.png") || (this.allItems[position] === "WhiteKing.png")){
 
                 if(this.allItems[position].substring(0,5) !== this.currentPlayer){
                     this.GetKingMoves(position);
                     
+                }
+                else{
+                    this.oppisiteKing = position
                 }                
     
             }
@@ -78,7 +77,13 @@ class Check{
 
         }
 
-       
+        for(let i=0;i<this.allMoves.length;i++){
+            if(this.allMoves[i] === this.oppisiteKing){
+                console.log(" this.allMoves[i] " + this.allMoves[i]);
+                console.log(" this.oppisiteKing " + this.oppisiteKing);
+                this.checkMade = true;
+            }
+        }
        
     }
 
@@ -86,7 +91,7 @@ class Check{
 
     GetBlackPawnMoves(currentPosition){
 
-        console.log("currentPosition " + currentPosition);
+        // sole.log("currentPositioconn " + currentPosition);
 
         let numericalCurrentPosition = parseInt(currentPosition);
         let numericalCurrentPositionRemainder  = Math.floor(numericalCurrentPosition % 10);
@@ -164,7 +169,7 @@ class Check{
 
     GetBishopMoves(currentPosition){
 
-        console.log("currentPosition " + currentPosition);
+        // console.log("currentPosition " + currentPosition);
 
         let currentPositionRow = parseInt(currentPosition);
         let currentPositionColumn  = Math.floor(currentPositionRow % 10);
@@ -179,7 +184,7 @@ class Check{
             combine +=j;
             combine+=i;
             if(this.allItems[combine] === undefined){               
-                console.log("-------------------");
+                // console.log("-------------------");
                 break;
             }
             else if(this.allItems[combine] !== "nothing"){
@@ -201,18 +206,18 @@ class Check{
         j  = currentPositionRow + 1;
         i = currentPositionColumn - 1;
         while(true){
-            console.log("j " + j)
-            console.log("i " + i)
+            // console.log("j " + j)
+            // console.log("i " + i)
 
             combine = "";
             combine+=j;
             combine+=i;
 
-            console.log("combine " + combine);
+            // console.log("combine " + combine);
 
             if(this.allItems[combine] === undefined){
                 
-                console.log("-------------------");
+                // console.log("-------------------");
                 break;
             }
             else if(this.allItems[combine] !== "nothing"){
@@ -225,7 +230,7 @@ class Check{
                     break;
                 }
             }
-            console.log("ASfdgfhgjkhjkhgjfgjkhjhkgjfjkhj,.")
+            //console.log("ASfdgfhgjkhjkhgjfgjkhjhkgjfjkhj,.")
             this.allMoves.push(combine);
             j+=1;
             i-=1;
@@ -239,7 +244,7 @@ class Check{
             combine+=i;
             if(this.allItems[combine] === undefined){
                 
-                console.log("-------------------");
+                // console.log("-------------------");
                 break;
             }
             else if(this.allItems[combine] !== "nothing"){
@@ -265,7 +270,7 @@ class Check{
             combine+=j;
             combine+=i;
             if(this.allItems[combine] === undefined){           
-                console.log("-------------------");
+                // console.log("-------------------");
                 break;
             }
             else if(this.allItems[combine] !== "nothing"){
@@ -289,111 +294,40 @@ class Check{
         let currentPositionColumn  = Math.floor(currentPositionRow % 10);
         currentPositionRow = Math.floor(currentPositionRow/10);
 
-        console.log("currentPosition " + currentPosition);
+        this.CheckIfValid(currentPositionRow+1,currentPositionColumn+2 )
 
-        let combine = "";
-        let row = currentPositionRow+1
-        let col = currentPositionColumn+2;
         
-        
+        this.CheckIfValid(currentPositionRow+2,currentPositionColumn+1)
 
-        combine+=row
-        combine+=col
+     
+        this.CheckIfValid(currentPositionRow+2,currentPositionColumn-1)
 
-        console.log("combine1 " + combine);
-        this.CheckKnightIfValid(combine)
+        this.CheckIfValid(currentPositionRow + 1,currentPositionColumn - 2)
 
-        combine = "";
+        this.CheckIfValid(currentPositionRow-2,currentPositionColumn-1)
 
-        row = currentPositionRow+2;
-        col =  currentPositionColumn+1;
        
+        this.CheckIfValid(currentPositionRow-1,currentPositionColumn+2)
 
-        combine+=row
-        combine+=col
-
-        console.log("combine2 " + combine);
-        this.CheckKnightIfValid(combine)
-
-        combine = "";
-
-        row = currentPositionRow+2;
-        col =  currentPositionColumn-1;
        
+        this.CheckIfValid(currentPositionRow-2,currentPositionColumn+1)
 
-        combine+=row
-        combine+=col
-
-        console.log("combine3 " + combine);
-        this.CheckKnightIfValid(combine)
-
-        combine = "";
         
 
-        row = currentPositionRow + 1;
-        col = currentPositionColumn - 2;
-
-        combine+=row;
-        combine+=col;
-
-        console.log("combine4 " + combine);
-        this.CheckKnightIfValid(combine)
-
-        combine = "";
-
-        row = currentPositionRow-2
-        col = currentPositionColumn-1
-        
-
-        combine+=row;
-        combine+=col;
-
-        console.log("combine5 " + combine);
-        this.CheckKnightIfValid(combine)
-
-        combine = "";
-
-        row = currentPositionRow-1
-        col = currentPositionColumn+2
-        
-
-        combine+=row
-        combine+=col
-
-        console.log("combine6 " + combine);
-        this.CheckKnightIfValid(combine)
-
-        combine = "";
-
-        row = currentPositionRow-2
-        col = currentPositionColumn+1
-        
-
-        combine+=row;
-        combine+=col;
-
-        console.log("combine7 " + combine);
-        this.CheckKnightIfValid(combine)
-
-        combine = "";
-
-        row = currentPositionRow-1
-        col = currentPositionColumn-2
-        
-        combine+=row
-        combine+=col
-
-        console.log("combine8 " + combine);
-        this.CheckKnightIfValid(combine)
+        // console.log("combine8 " + combine);
+        this.CheckIfValid(currentPositionRow-1,currentPositionColumn-2)
 
     }
-    CheckKnightIfValid(combine){
+    CheckIfValid(row, col){
         // console.log("combine12344 " + combine)
+        let combine = "";
+        combine+=row;
+        combine+=col;
         if(this.allItems[combine] === undefined){
             ;
         }
         else if((this.allItems[combine] === "nothing") || (this.allItems[combine].substring(0,5) === this.currentPlayer)){
-            console.log("combine123445678999 " + combine)
+            // console.log("combine123445678999 " + combine)
             this.allMoves.push(combine);
         }
 
@@ -417,7 +351,7 @@ class Check{
             combine +=j;
             combine+=i;
             if(this.allItems[combine] === undefined){               
-                console.log("-------------------");
+                // console.log("-------------------");
                 break;
             }
             else if(this.allItems[combine] !== "nothing"){
@@ -443,7 +377,7 @@ class Check{
             combine +=j;
             combine+=i;
             if(this.allItems[combine] === undefined){               
-                console.log("-------------------");
+                // console.log("-------------------");
                 break;
             }
             else if(this.allItems[combine] !== "nothing"){
@@ -470,7 +404,7 @@ class Check{
             combine +=j;
             combine+=i;
             if(this.allItems[combine] === undefined){               
-                console.log("-------------------");
+                // console.log("-------------------");
                 break;
             }
             else if(this.allItems[combine] !== "nothing"){
@@ -540,98 +474,26 @@ class Check{
         let currentPositionColumn  = Math.floor(currentPositionRow % 10);
         currentPositionRow = Math.floor(currentPositionRow/10);
 
+        this.CheckIfValid(currentPositionRow+1,currentPositionColumn+1)
 
-        let combine = "";
-        let row = currentPositionRow+1;
-        let col = currentPositionColumn+1;
+        this.CheckIfValid(currentPositionRow, currentPositionColumn+1)
 
-        combine+=row;
-        combine+=col;
+        this.CheckIfValid(currentPositionRow + 1, currentPositionColumn)
 
-        console.log("combine1 " + combine)
+        this.CheckIfValid(currentPositionRow + 1, currentPositionColumn - 1)
 
-        this.CheckKnightIfValid(combine)
+        this.CheckIfValid(currentPositionRow - 1, currentPositionColumn)
 
-        combine = "";
-        row = currentPositionRow;
-        col = currentPositionColumn+1;
+        this.CheckIfValid(currentPositionRow - 1, currentPositionColumn - 1)
 
-        combine+=row;
-        combine+=col;
+        this.CheckIfValid(currentPositionRow, currentPositionColumn - 1)
 
-        console.log("combine2 " + combine)
+        this.CheckIfValid(currentPositionRow - 1, currentPositionColumn + 1)
 
-        this.CheckKnightIfValid(combine)
+    }
 
-        combine = "";
-        row = currentPositionRow + 1;
-        col = currentPositionColumn;
-
-        combine+=row;
-        combine+=col;
-
-        console.log("combine3 " + combine)
-
-        this.CheckKnightIfValid(combine)
-
-
-        combine = "";
-        row = currentPositionRow + 1;
-        col = currentPositionColumn - 1;
-
-        combine+=row;
-        combine+=col;
-
-        console.log("combine4 " + combine)
-
-        this.CheckKnightIfValid(combine)
-
-
-        combine = "";
-        row = currentPositionRow - 1;
-        col = currentPositionColumn;
-
-        combine+=row;
-        combine+=col;
-
-        console.log("combine5 " + combine)
-
-        this.CheckKnightIfValid(combine)
-
-
-        combine = "";
-        row = currentPositionRow - 1;
-        col = currentPositionColumn - 1;
-
-        combine+=row;
-        combine+=col;
-
-        console.log("combine6 " + combine)
-
-        this.CheckKnightIfValid(combine)
-
-
-        combine = "";
-        row = currentPositionRow;
-        col = currentPositionColumn - 1;
-
-        combine+=row;
-        combine+=col;
-
-        console.log("combine7 " + combine)
-        this.CheckKnightIfValid(combine)
-
-
-        combine = "";
-        row = currentPositionRow - 1;
-        col = currentPositionColumn + 1;
-
-        combine+=row;
-        combine+=col;
-
-        console.log("combine8 " + combine)
-        this.CheckKnightIfValid(combine)
-
+    GetCheckMade(){
+        return this.checkMade;
     }
 
 
