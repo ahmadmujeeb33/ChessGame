@@ -156,6 +156,7 @@ function initiliztion(event){
         console.log(" ++++++++++++++++++++++");
         previousSelected = "";
         map.callRook(event.currentTarget.id);
+        map.findCheck();
         
     }
 

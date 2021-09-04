@@ -35,14 +35,22 @@ class Check{
                
             // }
 
-            if((this.allItems[position] === "BlackKnight.png") || (this.allItems[position] === "WhiteKnight.png")){
-                console.log("weeeeeeeeeeeeeeee")
-                console.log("this.allItems[position].substring(0,5) " + this.allItems[position].substring(0,5));
-                console.log(" this.currentPlayer " + this.currentPlayer);
-                if(this.allItems[position].substring(0,5) !== this.currentPlayer){
-                    this.GetKnightMoves(position);
-                }
+            // if((this.allItems[position] === "BlackKnight.png") || (this.allItems[position] === "WhiteKnight.png")){
+            //     console.log("weeeeeeeeeeeeeeee")
+            //     console.log("this.allItems[position].substring(0,5) " + this.allItems[position].substring(0,5));
+            //     console.log(" this.currentPlayer " + this.currentPlayer);
+            //     if(this.allItems[position].substring(0,5) !== this.currentPlayer){
+            //         this.GetKnightMoves(position);
+            //     }
                
+            // }
+
+            if((this.allItems[position] === "BlackRook.png") || (this.allItems[position] === "WhiteRook.png")){
+
+                    if(this.allItems[position].substring(0,5) !== this.currentPlayer){
+                        this.GetRookMoves(position);
+                    }                
+
             }
 
             console.log(this.allMoves);
@@ -370,6 +378,125 @@ class Check{
         }
 
         
+
+    }
+
+
+    GetRookMoves(currentPosition){
+        let currentPositionRow = parseInt(currentPosition);
+        let currentPositionColumn  = Math.floor(currentPositionRow % 10);
+        currentPositionRow = Math.floor(currentPositionRow/10);
+
+
+
+        let j = currentPositionRow+1;
+        let i = currentPositionColumn
+        let combine = "";
+        while(true){
+            combine = "";
+            combine +=j;
+            combine+=i;
+            if(this.allItems[combine] === undefined){               
+                console.log("-------------------");
+                break;
+            }
+            else if(this.allItems[combine] !== "nothing"){
+                // console.log("this.currentPlayer " + this.currentPlayer);
+                if(this.allItems[combine].substring(0,5) === this.currentPlayer){
+                    this.allMoves.push(combine);
+                    break
+                }
+                else{
+                    break;
+                }
+            }
+            this.allMoves.push(combine);
+            j+=1;
+            
+        }
+
+        j = currentPositionRow-1;
+        i = currentPositionColumn;
+        combine = "";
+        while(true){
+            combine = "";
+            combine +=j;
+            combine+=i;
+            if(this.allItems[combine] === undefined){               
+                console.log("-------------------");
+                break;
+            }
+            else if(this.allItems[combine] !== "nothing"){
+                // console.log("this.currentPlayer " + this.currentPlayer);
+                if(this.allItems[combine].substring(0,5) === this.currentPlayer){
+                    this.allMoves.push(combine);
+                    break
+                }
+                else{
+                    break;
+                }
+            }
+            this.allMoves.push(combine);
+            j-=1;
+            
+        }
+
+
+        j = currentPositionRow;
+        i = currentPositionColumn + 1;
+        combine = "";
+        while(true){
+            combine = "";
+            combine +=j;
+            combine+=i;
+            if(this.allItems[combine] === undefined){               
+                console.log("-------------------");
+                break;
+            }
+            else if(this.allItems[combine] !== "nothing"){
+                // console.log("this.currentPlayer " + this.currentPlayer);
+                if(this.allItems[combine].substring(0,5) === this.currentPlayer){
+                    this.allMoves.push(combine);
+                    break
+                }
+                else{
+                    break;
+                }
+            }
+            this.allMoves.push(combine);
+            i+=1;
+            
+        }
+
+
+        j = currentPositionRow;
+        i = currentPositionColumn - 1;
+        combine = "";
+        while(true){
+            combine = "";
+            combine +=j;
+            combine+=i;
+            if(this.allItems[combine] === undefined){               
+                console.log("-------------------");
+                break;
+            }
+            else if(this.allItems[combine] !== "nothing"){
+                // console.log("this.currentPlayer " + this.currentPlayer);
+                if(this.allItems[combine].substring(0,5) === this.currentPlayer){
+                    this.allMoves.push(combine);
+                    break
+                }
+                else{
+                    break;
+                }
+            }
+            this.allMoves.push(combine);
+            i-=1;
+            
+        }
+
+
+       
 
     }
 
